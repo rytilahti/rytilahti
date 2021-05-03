@@ -1,0 +1,88 @@
+query testq {
+  rateLimit {
+    cost
+    remaining
+    resetAt
+  }
+  user(login: "rytilahti") {
+    twitterUsername
+    createdAt
+    commitComments {
+      totalCount
+    }
+    issueComments {
+      totalCount
+    }
+    issues {
+      totalCount
+    }
+    pullRequests {
+      totalCount
+    }
+    contributionsCollection {
+      totalCommitContributions
+      totalIssueContributions
+      totalPullRequestContributions
+      totalPullRequestReviewContributions
+      totalRepositoriesWithContributedCommits
+      totalRepositoriesWithContributedPullRequestReviews
+      totalRepositoriesWithContributedPullRequests
+      startedAt
+      endedAt
+      totalRepositoriesWithContributedIssues
+      repositoryContributions {
+        totalCount
+      }
+      pullRequestContributions {
+        totalCount
+      }
+      pullRequestContributionsByRepository {
+        contributions(orderBy: {direction: DESC}) {
+          totalCount
+        }
+        repository {
+          nameWithOwner
+          url
+          stargazerCount
+          description
+          forkCount
+        }
+      }
+      issueContributions {
+        totalCount
+      }
+      pullRequestReviewContributionsByRepository {
+        contributions {
+          totalCount
+        }
+        repository {
+          description
+          nameWithOwner
+          url
+          stargazerCount
+          forkCount
+        }
+      }
+    }
+    followers {
+      totalCount
+    }
+    repositories(isFork: false, first: 100, orderBy: {field: STARGAZERS, direction: DESC}, affiliations: [OWNER, COLLABORATOR]) {
+      nodes {
+        description
+        stargazerCount
+        name
+        nameWithOwner
+        forkCount
+        url
+      }
+    }
+    organizations(first: 10) {
+      nodes {
+        url
+        viewerIsAMember
+        name
+      }
+    }
+  }
+}

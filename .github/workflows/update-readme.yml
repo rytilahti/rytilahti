@@ -1,0 +1,43 @@
+name: Update readme.md
+
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: "0 3 * * *"
+
+jobs:
+  build:
+    if: "!contains(github.event.commits[0].message, '[skip ci]')"
+
+    env:
+      TOKEN: ${{ secrets.TOKEN }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        persist-credentials: false
+        fetch-depth: 0
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Generate README.md
+      run: |
+        # execute nbconvert while removing metadata & output
+        jupyter nbconvert --ClearMetadataPreprocessor.enabled=True --clear-output --execute readmegen.ipynb
+    - name: Commit newly generated README.md
+      run: |
+        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git config --global user.name "github-actions[bot]"
+        git commit -m "[ci skip] Update README.md" README.md
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
