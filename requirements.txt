@@ -4,3 +4,4 @@ aiohttp
 --pre
 gql[aiohttp]
 ipyparallel
+jupyter_contrib_nbextensions

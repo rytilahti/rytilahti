@@ -67,7 +67,7 @@ query testq {
     followers {
       totalCount
     }
-    repositories(isFork: false, first: 100, orderBy: {field: STARGAZERS, direction: DESC}, affiliations: [OWNER, COLLABORATOR]) {
+    repositories(isFork: false, first: 100, orderBy: {field: STARGAZERS, direction: DESC}, affiliations: [OWNER, COLLABORATOR], privacy: PUBLIC) {
       nodes {
         description
         stargazerCount
