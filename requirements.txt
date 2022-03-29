@@ -10,10 +10,8 @@ aiohttp==3.8.1
     #   gql
 aiosignal==1.2.0
     # via aiohttp
-anyio==3.5.0
-    # via jupyter-server
 argon2-cffi==21.3.0
-    # via jupyter-server
+    # via notebook
 argon2-cffi-bindings==21.2.0
     # via argon2-cffi
 asttokens==2.0.5
@@ -24,20 +22,14 @@ attrs==21.4.0
     # via
     #   aiohttp
     #   jsonschema
-babel==2.9.1
-    # via jupyterlab-server
 backcall==0.2.0
     # via ipython
 bleach==4.1.0
     # via nbconvert
-certifi==2021.10.8
-    # via requests
 cffi==1.15.0
     # via argon2-cffi-bindings
 charset-normalizer==2.0.12
-    # via
-    #   aiohttp
-    #   requests
+    # via aiohttp
 debugpy==1.6.0
     # via ipykernel
 decorator==5.1.1
@@ -50,7 +42,6 @@ entrypoints==0.4
     # via
     #   ipyparallel
     #   jupyter-client
-    #   jupyterlab-server
     #   nbconvert
 executing==0.8.3
     # via stack-data
@@ -63,15 +54,12 @@ gql[aiohttp]==3.1.0
 graphql-core==3.2.0
     # via gql
 idna==3.3
-    # via
-    #   anyio
-    #   requests
-    #   yarl
+    # via yarl
 ipykernel==6.10.0
     # via
     #   -r requirements.in
     #   ipyparallel
-    #   jupyterlab
+    #   notebook
 ipyparallel==8.2.0
     # via -r requirements.in
 ipython==8.2.0
@@ -80,27 +68,23 @@ ipython==8.2.0
     #   ipyparallel
     #   jupyter-latex-envs
 ipython-genutils==0.2.0
-    # via jupyter-contrib-nbextensions
+    # via
+    #   jupyter-contrib-nbextensions
+    #   notebook
 jedi==0.18.1
     # via ipython
 jinja2==3.1.1
     # via
-    #   jupyter-server
-    #   jupyterlab
-    #   jupyterlab-server
     #   nbconvert
-json5==0.9.6
-    # via jupyterlab-server
+    #   notebook
 jsonschema==4.4.0
-    # via
-    #   jupyterlab-server
-    #   nbformat
+    # via nbformat
 jupyter-client==7.2.0
     # via
     #   ipykernel
     #   ipyparallel
-    #   jupyter-server
     #   nbclient
+    #   notebook
 jupyter-contrib-core==0.3.3
     # via
     #   jupyter-contrib-nbextensions
@@ -114,30 +98,17 @@ jupyter-core==4.9.2
     #   jupyter-contrib-nbextensions
     #   jupyter-latex-envs
     #   jupyter-nbextensions-configurator
-    #   jupyter-server
-    #   jupyterlab
     #   nbconvert
     #   nbformat
+    #   notebook
 jupyter-highlight-selected-word==0.2.0
     # via jupyter-contrib-nbextensions
 jupyter-latex-envs==1.4.6
     # via jupyter-contrib-nbextensions
 jupyter-nbextensions-configurator==0.4.1
     # via jupyter-contrib-nbextensions
-jupyter-server==1.15.6
-    # via
-    #   jupyterlab
-    #   jupyterlab-server
-    #   notebook
-    #   notebook-shim
-jupyterlab==4.0.0a22
-    # via notebook
 jupyterlab-pygments==0.1.2
     # via nbconvert
-jupyterlab-server==2.12.0
-    # via
-    #   jupyterlab
-    #   notebook
 lxml==4.8.0
     # via jupyter-contrib-nbextensions
 markupsafe==2.1.1
@@ -159,33 +130,27 @@ nbconvert==6.4.1
     #   -r requirements.in
     #   jupyter-contrib-nbextensions
     #   jupyter-latex-envs
-    #   jupyter-server
+    #   notebook
 nbformat==5.2.0
     # via
-    #   jupyter-server
     #   nbclient
     #   nbconvert
+    #   notebook
 nest-asyncio==1.5.4
     # via
     #   ipykernel
     #   jupyter-client
     #   nbclient
-notebook==7.0.0a2
+    #   notebook
+notebook==6.4.8
     # via
+    #   -r requirements.in
     #   jupyter-contrib-core
     #   jupyter-contrib-nbextensions
     #   jupyter-latex-envs
     #   jupyter-nbextensions-configurator
-notebook-shim==0.1.0
-    # via
-    #   jupyterlab
-    #   notebook
 packaging==21.3
-    # via
-    #   bleach
-    #   jupyter-server
-    #   jupyterlab
-    #   jupyterlab-server
+    # via bleach
 pandocfilters==1.5.0
     # via nbconvert
 parso==0.8.3
@@ -195,7 +160,7 @@ pexpect==4.8.0
 pickleshare==0.7.5
     # via ipython
 prometheus-client==0.13.1
-    # via jupyter-server
+    # via notebook
 prompt-toolkit==3.0.28
     # via ipython
 psutil==5.9.0
@@ -223,8 +188,6 @@ python-dateutil==2.8.2
     # via
     #   ipyparallel
     #   jupyter-client
-pytz==2022.1
-    # via babel
 pyyaml==6.0
     # via
     #   jupyter-contrib-nbextensions
@@ -233,22 +196,18 @@ pyzmq==23.0.0b1
     # via
     #   ipyparallel
     #   jupyter-client
-    #   jupyter-server
-requests==2.27.1
-    # via jupyterlab-server
+    #   notebook
 send2trash==1.8.1b0
-    # via jupyter-server
+    # via notebook
 six==1.16.0
     # via
     #   asttokens
     #   bleach
     #   python-dateutil
-sniffio==1.2.0
-    # via anyio
 stack-data==0.2.0
     # via ipython
 terminado==0.13.3
-    # via jupyter-server
+    # via notebook
 testpath==0.6.0
     # via nbconvert
 tornado==6.1
@@ -259,8 +218,6 @@ tornado==6.1
     #   jupyter-contrib-core
     #   jupyter-contrib-nbextensions
     #   jupyter-nbextensions-configurator
-    #   jupyter-server
-    #   jupyterlab
     #   notebook
     #   terminado
 tqdm==4.63.1
@@ -276,19 +233,15 @@ traitlets==5.1.1
     #   jupyter-core
     #   jupyter-latex-envs
     #   jupyter-nbextensions-configurator
-    #   jupyter-server
     #   matplotlib-inline
     #   nbclient
     #   nbconvert
     #   nbformat
-urllib3==1.26.9
-    # via requests
+    #   notebook
 wcwidth==0.2.5
     # via prompt-toolkit
 webencodings==0.5.1
     # via bleach
-websocket-client==1.3.2
-    # via jupyter-server
 yarl==1.7.2
     # via
     #   aiohttp
