@@ -1,0 +1,8 @@
+nbconvert==6.4.1
+ipykernel
+aiohttp
+--pre
+gql[aiohttp]
+ipyparallel
+jupyter_contrib_nbextensions
+
