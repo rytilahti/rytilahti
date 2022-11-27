@@ -1,5 +1,5 @@
-nbconvert==6.4.1
-notebook==6.4.8
+nbconvert==7.2.5
+notebook==6.5.2
 ipykernel
 aiohttp
 --pre
