@@ -31,7 +31,7 @@ jobs:
     - name: Generate README.md
       run: |
         # execute nbconvert while removing metadata & output
-        jupyter nbconvert --ClearMetadataPreprocessor.enabled=True --clear-output --execute readmegen.ipynb
+        jupyter nbconvert --ClearMetadataPreprocessor.enabled=True --ClearOutputPreprocessor.enabled=True --to notebook readmegen.ipynb
     - name: Commit newly generated README.md
       run: |
         git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
