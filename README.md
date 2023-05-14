@@ -9,22 +9,22 @@ mostly on projects useful for home automation.
 
 According to GitHub, I have submitted 110 issues, 858 pull requests,
 and also written 4,541 issue comments here since 2013.
-Since then, my projects have been honored with a total of 4,093 ⭐ and 853 🍴.
+Since then, my projects have been honored with a total of 4,107 ⭐ and 854 🍴.
 I am happy if you have found my software, code reviews, help, or feedback useful! 🥰
 
 Most of my Python projects are also available on the [Python Package Index](https://pypi.org/user/rytilahti/),
-which according to the [PyPI Stats](https://pypistats.org/) have been downloaded 773,016 times over the past month.
+which according to the [PyPI Stats](https://pypistats.org/) have been downloaded 764,619 times over the past month.
 
 
 ### My projects
 
 GitHub says that I am currently a maintainer or a collaborator in the following projects:
 
-1. [rytilahti/python-miio – Python library & console tool for controlling Xiaomi smart appliances](https://github.com/rytilahti/python-miio) (2,559 ⭐, 472 🍴)
-2. [python-kasa/python-kasa – 🏠🤖 Python API for TP-Link Kasa Smarthome products](https://github.com/python-kasa/python-kasa) (832 ⭐, 141 🍴)
-3. [GadgetReactor/pyHS100 – Python Library to control TPLink Switch (HS100 / HS110)](https://github.com/GadgetReactor/pyHS100) (405 ⭐, 135 🍴)
+1. [rytilahti/python-miio – Python library & console tool for controlling Xiaomi smart appliances](https://github.com/rytilahti/python-miio) (2,568 ⭐, 472 🍴)
+2. [python-kasa/python-kasa – 🏠🤖 Python API for TP-Link Kasa Smarthome products](https://github.com/python-kasa/python-kasa) (835 ⭐, 142 🍴)
+3. [GadgetReactor/pyHS100 – Python Library to control TPLink Switch (HS100 / HS110)](https://github.com/GadgetReactor/pyHS100) (406 ⭐, 135 🍴)
 4. [rytilahti/python-eq3bt – Python library and command-line tool for eQ-3 Smart Bluetooth thermostats](https://github.com/rytilahti/python-eq3bt) (109 ⭐, 39 🍴)
-5. [rytilahti/python-yeelightbt – Python library for Yeelight's bedside (btle) and candela lamps](https://github.com/rytilahti/python-yeelightbt) (75 ⭐, 26 🍴)
+5. [rytilahti/python-yeelightbt – Python library for Yeelight's bedside (btle) and candela lamps](https://github.com/rytilahti/python-yeelightbt) (76 ⭐, 26 🍴)
 
 <details><summary>Show more</summary><p>
 
@@ -38,32 +38,32 @@ GitHub says that I am currently a maintainer or a collaborator in the following 
 
 ### Recent contributions
 
-In the past 371 days (since 30 April, 2022), I have submitted 204 pull requests on 17 different repositories, including:
-* 138 pull requests to [rytilahti/python-miio – Python library & console tool for controlling Xiaomi smart appliances](https://github.com/rytilahti/python-miio) (2,559 ⭐, 472 🍴)
-* 25 pull requests to [python-kasa/python-kasa – 🏠🤖 Python API for TP-Link Kasa Smarthome products](https://github.com/python-kasa/python-kasa) (832 ⭐, 141 🍴)
-* 15 pull requests to [home-assistant/core – :house_with_garden: Open source home automation that puts local control and privacy first.](https://github.com/home-assistant/core) (60,206 ⭐, 23,037 🍴)
+In the past 371 days (since 07 May, 2022), I have submitted 204 pull requests on 17 different repositories, including:
+* 138 pull requests to [rytilahti/python-miio – Python library & console tool for controlling Xiaomi smart appliances](https://github.com/rytilahti/python-miio) (2,568 ⭐, 472 🍴)
+* 25 pull requests to [python-kasa/python-kasa – 🏠🤖 Python API for TP-Link Kasa Smarthome products](https://github.com/python-kasa/python-kasa) (835 ⭐, 142 🍴)
+* 15 pull requests to [home-assistant/core – :house_with_garden: Open source home automation that puts local control and privacy first.](https://github.com/home-assistant/core) (60,417 ⭐, 23,135 🍴)
 * 7 pull requests to [rytilahti/python-eq3bt – Python library and command-line tool for eQ-3 Smart Bluetooth thermostats](https://github.com/rytilahti/python-eq3bt) (109 ⭐, 39 🍴)
 * 6 pull requests to [rytilahti/homeassistant-upnp-availability – UPnP Availability sensor for Home Assistant](https://github.com/rytilahti/homeassistant-upnp-availability) (16 ⭐, 5 🍴)
 
 <details><summary>Show more</summary><p>
 
 * 4 pull requests to [rytilahti/python-songpal – Python library for interfacing with Sony's Songpal devices](https://github.com/rytilahti/python-songpal) (58 ⭐, 21 🍴)
-* 4 pull requests to [home-assistant/developers.home-assistant – Developers website for Home Assistant.](https://github.com/home-assistant/developers.home-assistant) (199 ⭐, 694 🍴)
+* 4 pull requests to [home-assistant/developers.home-assistant – Developers website for Home Assistant.](https://github.com/home-assistant/developers.home-assistant) (200 ⭐, 699 🍴)
 * 2 pull requests to [Squachen/micloud – Library for connecting to xiaomi cloud. ](https://github.com/Squachen/micloud) (113 ⭐, 12 🍴)
-* 2 pull requests to [home-assistant/brands – 🎨 Brands for Home Assistant](https://github.com/home-assistant/brands) (159 ⭐, 1,116 🍴)
-* 1 pull requests to [hacs/default – The home of the default HACS repositories.](https://github.com/hacs/default) (265 ⭐, 728 🍴)
+* 2 pull requests to [home-assistant/brands – 🎨 Brands for Home Assistant](https://github.com/home-assistant/brands) (160 ⭐, 1,126 🍴)
+* 1 pull requests to [hacs/default – The home of the default HACS repositories.](https://github.com/hacs/default) (266 ⭐, 731 🍴)
 </p></details>
 
 
 ### Code Reviews
 
 Besides contributing pull requests, I also try to help others by doing code reviews.
-During the previously mentioned time period, I have submitted 153 reviews to pull requests on 10 different repositories, including:
-* 63 reviews to [rytilahti/python-miio – Python library & console tool for controlling Xiaomi smart appliances](https://github.com/rytilahti/python-miio) (2,559 ⭐, 472 🍴)
-* 53 reviews to [home-assistant/core – :house_with_garden: Open source home automation that puts local control and privacy first.](https://github.com/home-assistant/core) (60,206 ⭐, 23,037 🍴)
-* 12 reviews to [python-kasa/python-kasa – 🏠🤖 Python API for TP-Link Kasa Smarthome products](https://github.com/python-kasa/python-kasa) (832 ⭐, 141 🍴)
-* 9 reviews to [home-assistant/home-assistant.io – :blue_book: Home Assistant User documentation](https://github.com/home-assistant/home-assistant.io) (3,621 ⭐, 6,452 🍴)
-* 6 reviews to [home-assistant/developers.home-assistant – Developers website for Home Assistant.](https://github.com/home-assistant/developers.home-assistant) (199 ⭐, 694 🍴)
+During the previously mentioned time period, I have submitted 150 reviews to pull requests on 10 different repositories, including:
+* 62 reviews to [rytilahti/python-miio – Python library & console tool for controlling Xiaomi smart appliances](https://github.com/rytilahti/python-miio) (2,568 ⭐, 472 🍴)
+* 52 reviews to [home-assistant/core – :house_with_garden: Open source home automation that puts local control and privacy first.](https://github.com/home-assistant/core) (60,417 ⭐, 23,135 🍴)
+* 12 reviews to [python-kasa/python-kasa – 🏠🤖 Python API for TP-Link Kasa Smarthome products](https://github.com/python-kasa/python-kasa) (835 ⭐, 142 🍴)
+* 8 reviews to [home-assistant/home-assistant.io – :blue_book: Home Assistant User documentation](https://github.com/home-assistant/home-assistant.io) (3,646 ⭐, 6,458 🍴)
+* 6 reviews to [home-assistant/developers.home-assistant – Developers website for Home Assistant.](https://github.com/home-assistant/developers.home-assistant) (200 ⭐, 699 🍴)
 
 <details><summary>Show more</summary><p>
 
@@ -75,4 +75,4 @@ During the previously mentioned time period, I have submitted 153 reviews to pul
 * 1 reviews to [SoCo/SoCo – SoCo (Sonos Controller) is a Python project that allows you to programmatically control Sonos speakers.](https://github.com/SoCo/SoCo) (1,391 ⭐, 231 🍴)
 </p></details>
 
-(Generated on 07 May, 2023)
+(Generated on 14 May, 2023)
