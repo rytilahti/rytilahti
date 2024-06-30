@@ -1,8 +1,7 @@
-nbconvert==7.2.5
-notebook==6.5.2
+nbconvert
+notebook
 ipykernel
 aiohttp
---pre
 gql[aiohttp]
 ipyparallel
 jupyter_contrib_nbextensions
