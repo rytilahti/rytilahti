@@ -1,8 +1,4 @@
-nbconvert
-notebook
-ipykernel
+marimo
 aiohttp
 gql[aiohttp]
-ipyparallel
-jupyter_contrib_nbextensions
 pypistats
