@@ -1,10 +1,10 @@
 # /// script
 # requires-python = ">=3.11"
 # dependencies = [
-#   "marimo>=0.20.2",
-#   "aiohttp>=3.13.3",
-#   "gql[aiohttp]>=4.0.0",
-#   "pypistats>=1.13.0",
+#   "marimo==0.20.2",
+#   "aiohttp==3.13.3",
+#   "gql[aiohttp]==4.0.0",
+#   "pypistats==1.13.0",
 # ]
 # ///
 
