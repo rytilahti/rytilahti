@@ -25,21 +25,9 @@ import pypistats
 __generated_with = "0.10.0"
 app = marimo.App()
 
-DEBUG = int(os.environ.get("DEBUG", 0))
 TOKEN = os.environ["TOKEN"]
 
 SUMMARIZE_AFTER_COUNT = 5
-DATE_FORMAT = "%d %B, %Y"
-
-PYPI_PACKAGES = [
-    "python-miio",
-    "python-kasa",
-    "pyHS100",
-    "python-eq3bt",
-    "python-yeelightbt",
-    "python-songpal",
-    "python-mirobo",
-]
 
 
 async def fetch_data(query: str) -> dict[str, Any]:
@@ -128,6 +116,17 @@ def fetch_pypistats(func: Any, *args: Any, retries: int = 3, backoff: float = 5.
 
 @app.cell
 def __():
+    import json
+    import pypistats
+    PYPI_PACKAGES = [
+        "python-miio",
+        "python-kasa",
+        "pyHS100",
+        "python-eq3bt",
+        "python-yeelightbt",
+        "python-songpal",
+        "python-mirobo",
+    ]
     # monthly stats here just for reference, last_week is also available.
     pypi_recent: dict[str, int] = {}
     for _package in PYPI_PACKAGES:
@@ -142,8 +141,8 @@ def __():
 
 @app.cell
 async def __():
-    with open("github_query.graphql") as f:
-        _q = f.read()
+    with open("github_query.graphql") as _f:
+        _q = _f.read()
     data = await fetch_data(_q)
     userdata = data["user"]
     return data, userdata
@@ -151,6 +150,7 @@ async def __():
 
 @app.cell
 def __(userdata):
+    from datetime import datetime, timedelta, timezone
     contrs = userdata["contributionsCollection"]
     repos = get_repos(userdata)
     counts = get_counts(userdata)
@@ -162,11 +162,11 @@ def __(userdata):
     )
     from_date = datetime.strptime(contrs["startedAt"], "%Y-%m-%dT%H:%M:%S%z")
     days_since = int((datetime.now(timezone.utc) - from_date) / timedelta(days=1))
-    return code_review_stats, contrs, counts, days_since, from_date, pull_request_stats, repos
+    return code_review_stats, contrs, counts, datetime, days_since, from_date, pull_request_stats, repos, timezone
 
 
 @app.cell
-def __(counts, pypi_recent_count, userdata):
+def __(counts, datetime, pypi_recent_count, userdata):
     member_since = datetime.strptime(userdata["createdAt"], "%Y-%m-%dT%H:%M:%S%z")
     stats = f"""According to GitHub, I have submitted {pretty_count(userdata, "issues")} issues, {pretty_count(userdata, "pullRequests")} pull requests,
 and also written {pretty_count(userdata, "issueComments")} issue comments here since {member_since.strftime("%Y")}.
@@ -180,7 +180,10 @@ which according to the [PyPI Stats](https://pypistats.org/) have been downloaded
 
 
 @app.cell
-def __(code_review_stats, contrs, days_since, from_date, pull_request_stats, repos, stats):
+def __(code_review_stats, contrs, datetime, days_since, from_date, pull_request_stats, repos, stats, timezone):
+    import os
+    DEBUG = int(os.environ.get("DEBUG", 0))
+    DATE_FORMAT = "%d %B, %Y"
     DEBUG_STR = "<!-- {debug} -->" if DEBUG else ""
     content = f"""
 {DEBUG_STR}
@@ -214,8 +217,8 @@ During the previously mentioned time period, I have submitted {contrs["totalPull
 (Generated on {datetime.now(timezone.utc).strftime(DATE_FORMAT)})
 """
 
-    with open("README.md", "w") as f:
-        f.write(content)
+    with open("README.md", "w") as _f:
+        _f.write(content)
 
     return (content,)
 
