@@ -1,10 +1,10 @@
 # /// script
 # requires-python = ">=3.11"
 # dependencies = [
-#   "marimo",
-#   "aiohttp",
-#   "gql[aiohttp]",
-#   "pypistats",
+#   "marimo>=0.20.2",
+#   "aiohttp>=3.13.3",
+#   "gql[aiohttp]>=4.0.0",
+#   "pypistats>=1.13.0",
 # ]
 # ///
 
@@ -86,20 +86,15 @@ def get_contributions_list(contributions, count=SUMMARIZE_AFTER_COUNT, contribut
 
 def get_repos(userdata, count=SUMMARIZE_AFTER_COUNT):
     output = ""
-    idx = 0
     logging.info("Found %s repositories", len(userdata["repositories"]["nodes"]))
     ignored_repos = ["rytilahti/rytilahti", "rytilahti/.github"]
-    for project in userdata["repositories"]["nodes"]:
-        if project["nameWithOwner"] in ignored_repos:
-            continue
+    projects = [p for p in userdata["repositories"]["nodes"] if p["nameWithOwner"] not in ignored_repos]
+    if not projects:
+        logging.error("No valid projects found after filtering: %s", userdata["repositories"]["nodes"])
+    for idx, project in enumerate(projects):
         if idx == count:
             output += "\n<details><summary>Show more</summary><p>\n\n"
-        output += f"{idx+1}. {pretty_project(project)}\n"
-        idx += 1
-    if not output:
-        print(userdata["repositories"]["nodes"])
-        logging.error(userdata["repositories"]["nodes"])
-        #raise Exception("Unable to download repo information")
+        output += f"{idx + 1}. {pretty_project(project)}\n"
     output += "</p></details>"
     return output
 
@@ -168,23 +163,13 @@ which according to the [PyPI Stats](https://pypistats.org/) have been downloaded
 
 
 @app.cell
-def __(userdata):
-    OPEN_TO_WORK = (
-        "**I am currently looking for new opportunities, [feel free to get in touch!](https://linkedin.com/in/teemurytilahti)**"
-        if userdata["isHireable"]
-        else ""
-    )
-    return (OPEN_TO_WORK,)
-
-
-@app.cell
-def __(OPEN_TO_WORK, code_review_stats, contrs, days_since, from_date, pull_request_stats, repos, stats):
+def __(code_review_stats, contrs, days_since, from_date, pull_request_stats, repos, stats):
     DEBUG_STR = "<!-- {debug} -->" if DEBUG else ""
     content = f"""
 {DEBUG_STR}
 ### Hello! Hallo! Moi! \N{WAVING HAND SIGN}
 
-I am Teemu from \N{REGIONAL INDICATOR SYMBOL LETTER F}\N{REGIONAL INDICATOR SYMBOL LETTER I}, and I'm currently living in \N{REGIONAL INDICATOR SYMBOL LETTER D}\N{REGIONAL INDICATOR SYMBOL LETTER E}, happy to see you here! {OPEN_TO_WORK}
+I am Teemu from \N{REGIONAL INDICATOR SYMBOL LETTER F}\N{REGIONAL INDICATOR SYMBOL LETTER I}, and I'm currently living in \N{REGIONAL INDICATOR SYMBOL LETTER D}\N{REGIONAL INDICATOR SYMBOL LETTER E}, happy to see you here!
 
 On this profile page, I present you some ([automatically generated](https://github.com/rytilahti/rytilahti)) information about my public contributions here on GitHub, 
 mostly on projects useful for home automation.
