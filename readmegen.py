@@ -25,11 +25,9 @@ import pypistats
 __generated_with = "0.10.0"
 app = marimo.App()
 
-DEBUG = int(os.environ.get("DEBUG", 0))
 TOKEN = os.environ["TOKEN"]
 
 SUMMARIZE_AFTER_COUNT = 5
-DATE_FORMAT = "%d %B, %Y"
 
 
 async def fetch_data(query: str) -> dict[str, Any]:
@@ -180,6 +178,8 @@ which according to the [PyPI Stats](https://pypistats.org/) have been downloaded
 
 @app.cell
 def __(code_review_stats, contrs, days_since, from_date, pull_request_stats, repos, stats):
+    DEBUG = int(os.environ.get("DEBUG", 0))
+    DATE_FORMAT = "%d %B, %Y"
     DEBUG_STR = "<!-- {debug} -->" if DEBUG else ""
     content = f"""
 {DEBUG_STR}
