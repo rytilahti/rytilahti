@@ -10,15 +10,12 @@
 
 import marimo
 
-import asyncio
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 import json
 import logging
 import os
-from pprint import pformat as pf, pprint as pp
-import string
-import sys
+from typing import Any
 
 from gql import Client, gql
 from gql.transport.aiohttp import AIOHTTPTransport
@@ -27,13 +24,8 @@ import pypistats
 __generated_with = "0.10.0"
 app = marimo.App()
 
-DEBUG = 0
-try:
-    TOKEN = os.environ["TOKEN"]
-    DEBUG = os.environ.get("DEBUG", 0)
-except KeyError:
-    with open(".token") as f:
-        TOKEN = f.read().strip()
+DEBUG = int(os.environ.get("DEBUG", 0))
+TOKEN = os.environ["TOKEN"]
 
 SUMMARIZE_AFTER_COUNT = 5
 DATE_FORMAT = "%d %B, %Y"
@@ -49,7 +41,7 @@ PYPI_PACKAGES = [
 ]
 
 
-async def fetch_data(query):
+async def fetch_data(query: str) -> dict[str, Any]:
     transport = AIOHTTPTransport(
         url="https://api.github.com/graphql",
         headers={"Authorization": f"bearer {TOKEN}"},
@@ -62,7 +54,7 @@ async def fetch_data(query):
         return result
 
 
-def pretty_project(project):
+def pretty_project(project: dict[str, Any]) -> str:
     return (
         f'[{project["nameWithOwner"]} \N{EN DASH} {project["description"]}]'
         f'({project["url"]}) '
@@ -71,7 +63,11 @@ def pretty_project(project):
     )
 
 
-def get_contributions_list(contributions, count=SUMMARIZE_AFTER_COUNT, contribution_type="contributions"):
+def get_contributions_list(
+    contributions: list[dict[str, Any]],
+    count: int = SUMMARIZE_AFTER_COUNT,
+    contribution_type: str = "contributions",
+) -> str:
     output = ""
     logging.info("Found %s contributions of type '%s'", len(contributions), contribution_type)
     for idx, contribution in enumerate(contributions):
@@ -84,7 +80,7 @@ def get_contributions_list(contributions, count=SUMMARIZE_AFTER_COUNT, contribut
     return output
 
 
-def get_repos(userdata, count=SUMMARIZE_AFTER_COUNT):
+def get_repos(userdata: dict[str, Any], count: int = SUMMARIZE_AFTER_COUNT) -> str:
     output = ""
     logging.info("Found %s repositories", len(userdata["repositories"]["nodes"]))
     ignored_repos = ["rytilahti/rytilahti", "rytilahti/.github"]
@@ -99,16 +95,16 @@ def get_repos(userdata, count=SUMMARIZE_AFTER_COUNT):
     return output
 
 
-def get_counts(userdata):
+def get_counts(userdata: dict[str, Any]) -> defaultdict[str, int]:
     keys = ["stargazerCount", "forkCount"]
-    res = defaultdict(lambda: 0)
+    res: defaultdict[str, int] = defaultdict(int)
     for repo in userdata["repositories"]["nodes"]:
         for k in keys:
             res[k] += repo[k]
     return res
 
 
-def pretty_count(user, var):
+def pretty_count(user: dict[str, Any], var: str) -> str:
     return f'{user[var]["totalCount"]:,}'
 
 
