@@ -1,15 +1,13 @@
 # /// script
 # requires-python = ">=3.11"
 # dependencies = [
-#   "marimo==0.20.2",
 #   "aiohttp==3.13.3",
 #   "gql[aiohttp]==4.0.0",
 #   "pypistats==1.13.0",
 # ]
 # ///
 
-import marimo
-
+import asyncio
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 import json
@@ -21,9 +19,6 @@ from typing import Any
 from gql import Client, gql
 from gql.transport.aiohttp import AIOHTTPTransport
 import pypistats
-
-__generated_with = "0.10.0"
-app = marimo.App()
 
 DEBUG = int(os.environ.get("DEBUG", 0))
 TOKEN = os.environ["TOKEN"]
@@ -126,8 +121,7 @@ def fetch_pypistats(func: Any, *args: Any, retries: int = 3, backoff: float = 5.
                 raise
 
 
-@app.cell
-def __():
+async def main() -> None:
     # monthly stats here just for reference, last_week is also available.
     pypi_recent: dict[str, int] = {}
     for _package in PYPI_PACKAGES:
@@ -137,20 +131,12 @@ def __():
             print(f"Warning: could not fetch pypistats for {_package} after retries: {e}")
             pypi_recent[_package] = 0
     pypi_recent_count = sum(pypi_recent.values())
-    return pypi_recent, pypi_recent_count
 
-
-@app.cell
-async def __():
     with open("github_query.graphql") as f:
         _q = f.read()
     data = await fetch_data(_q)
     userdata = data["user"]
-    return data, userdata
 
-
-@app.cell
-def __(userdata):
     contrs = userdata["contributionsCollection"]
     repos = get_repos(userdata)
     counts = get_counts(userdata)
@@ -162,11 +148,7 @@ def __(userdata):
     )
     from_date = datetime.strptime(contrs["startedAt"], "%Y-%m-%dT%H:%M:%S%z")
     days_since = int((datetime.now(timezone.utc) - from_date) / timedelta(days=1))
-    return code_review_stats, contrs, counts, days_since, from_date, pull_request_stats, repos
 
-
-@app.cell
-def __(counts, pypi_recent_count, userdata):
     member_since = datetime.strptime(userdata["createdAt"], "%Y-%m-%dT%H:%M:%S%z")
     stats = f"""According to GitHub, I have submitted {pretty_count(userdata, "issues")} issues, {pretty_count(userdata, "pullRequests")} pull requests,
 and also written {pretty_count(userdata, "issueComments")} issue comments here since {member_since.strftime("%Y")}.
@@ -176,11 +158,7 @@ I am happy if you have found my software, code reviews, help, or feedback useful
 Most of my Python projects are also available on the [Python Package Index](https://pypi.org/user/rytilahti/),
 which according to the [PyPI Stats](https://pypistats.org/) have been downloaded {pypi_recent_count:,} times over the past month.
 """
-    return member_since, stats
 
-
-@app.cell
-def __(code_review_stats, contrs, days_since, from_date, pull_request_stats, repos, stats):
     DEBUG_STR = "<!-- {debug} -->" if DEBUG else ""
     content = f"""
 {DEBUG_STR}
@@ -217,15 +195,6 @@ During the previously mentioned time period, I have submitted {contrs["totalPull
     with open("README.md", "w") as f:
         f.write(content)
 
-    return (content,)
-
-
-@app.cell
-def __(content):
-    import marimo as mo
-
-    return mo.md(content)
-
 
 if __name__ == "__main__":
-    app.run()
+    asyncio.run(main())
