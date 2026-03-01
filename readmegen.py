@@ -31,16 +31,6 @@ TOKEN = os.environ["TOKEN"]
 SUMMARIZE_AFTER_COUNT = 5
 DATE_FORMAT = "%d %B, %Y"
 
-PYPI_PACKAGES = [
-    "python-miio",
-    "python-kasa",
-    "pyHS100",
-    "python-eq3bt",
-    "python-yeelightbt",
-    "python-songpal",
-    "python-mirobo",
-]
-
 
 async def fetch_data(query: str) -> dict[str, Any]:
     transport = AIOHTTPTransport(
@@ -128,6 +118,15 @@ def fetch_pypistats(func: Any, *args: Any, retries: int = 3, backoff: float = 5.
 
 @app.cell
 def __():
+    PYPI_PACKAGES = [
+        "python-miio",
+        "python-kasa",
+        "pyHS100",
+        "python-eq3bt",
+        "python-yeelightbt",
+        "python-songpal",
+        "python-mirobo",
+    ]
     # monthly stats here just for reference, last_week is also available.
     pypi_recent: dict[str, int] = {}
     for _package in PYPI_PACKAGES:
