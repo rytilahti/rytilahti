@@ -162,12 +162,11 @@ def __(userdata):
     )
     from_date = datetime.strptime(contrs["startedAt"], "%Y-%m-%dT%H:%M:%S%z")
     days_since = int((datetime.now(timezone.utc) - from_date) / timedelta(days=1))
-    return code_review_stats, contrs, counts, days_since, from_date, pull_request_stats, repos
+    return code_review_stats, contrs, counts, datetime, days_since, from_date, pull_request_stats, repos, timezone
 
 
 @app.cell
-def __(counts, pypi_recent_count, userdata):
-    from datetime import datetime
+def __(counts, datetime, pypi_recent_count, userdata):
     member_since = datetime.strptime(userdata["createdAt"], "%Y-%m-%dT%H:%M:%S%z")
     stats = f"""According to GitHub, I have submitted {pretty_count(userdata, "issues")} issues, {pretty_count(userdata, "pullRequests")} pull requests,
 and also written {pretty_count(userdata, "issueComments")} issue comments here since {member_since.strftime("%Y")}.
@@ -181,9 +180,8 @@ which according to the [PyPI Stats](https://pypistats.org/) have been downloaded
 
 
 @app.cell
-def __(code_review_stats, contrs, days_since, from_date, pull_request_stats, repos, stats):
+def __(code_review_stats, contrs, datetime, days_since, from_date, pull_request_stats, repos, stats, timezone):
     import os
-    from datetime import datetime, timezone
     DEBUG = int(os.environ.get("DEBUG", 0))
     DATE_FORMAT = "%d %B, %Y"
     DEBUG_STR = "<!-- {debug} -->" if DEBUG else ""
