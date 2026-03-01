@@ -15,6 +15,7 @@ from datetime import datetime, timedelta, timezone
 import json
 import logging
 import os
+import time
 from typing import Any
 
 from gql import Client, gql
@@ -108,13 +109,33 @@ def pretty_count(user: dict[str, Any], var: str) -> str:
     return f'{user[var]["totalCount"]:,}'
 
 
+def fetch_pypistats(func: Any, *args: Any, retries: int = 3, backoff: float = 5.0, **kwargs: Any) -> Any:
+    """Call a pypistats function with exponential backoff retries on failure.
+
+    Retries on any exception (e.g. HTTP 429, network timeouts, service outages).
+    """
+    for attempt in range(retries):
+        try:
+            return func(*args, **kwargs)
+        except Exception as e:
+            if attempt < retries - 1:
+                wait = backoff * (2 ** attempt)
+                print(f"Warning: pypistats call failed ({str(e)}), retrying in {wait:.0f}s (attempt {attempt + 1}/{retries})")
+                time.sleep(wait)
+            else:
+                raise
+
+
 @app.cell
 def __():
     # monthly stats here just for reference, last_week is also available.
-    pypi_recent = {
-        package: json.loads(pypistats.recent(package, format="json"))["data"]["last_month"]
-        for package in PYPI_PACKAGES
-    }
+    pypi_recent: dict[str, int] = {}
+    for _package in PYPI_PACKAGES:
+        try:
+            pypi_recent[_package] = json.loads(fetch_pypistats(pypistats.recent, _package, format="json"))["data"]["last_month"]
+        except Exception as e:
+            print(f"Warning: could not fetch pypistats for {_package} after retries: {e}")
+            pypi_recent[_package] = 0
     pypi_recent_count = sum(pypi_recent.values())
     return pypi_recent, pypi_recent_count
 
