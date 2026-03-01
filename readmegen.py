@@ -116,6 +116,8 @@ def fetch_pypistats(func: Any, *args: Any, retries: int = 3, backoff: float = 5.
 
 @app.cell
 def __():
+    import json
+    import pypistats
     PYPI_PACKAGES = [
         "python-miio",
         "python-kasa",
@@ -148,6 +150,7 @@ async def __():
 
 @app.cell
 def __(userdata):
+    from datetime import datetime, timedelta, timezone
     contrs = userdata["contributionsCollection"]
     repos = get_repos(userdata)
     counts = get_counts(userdata)
@@ -164,6 +167,7 @@ def __(userdata):
 
 @app.cell
 def __(counts, pypi_recent_count, userdata):
+    from datetime import datetime
     member_since = datetime.strptime(userdata["createdAt"], "%Y-%m-%dT%H:%M:%S%z")
     stats = f"""According to GitHub, I have submitted {pretty_count(userdata, "issues")} issues, {pretty_count(userdata, "pullRequests")} pull requests,
 and also written {pretty_count(userdata, "issueComments")} issue comments here since {member_since.strftime("%Y")}.
@@ -178,6 +182,8 @@ which according to the [PyPI Stats](https://pypistats.org/) have been downloaded
 
 @app.cell
 def __(code_review_stats, contrs, days_since, from_date, pull_request_stats, repos, stats):
+    import os
+    from datetime import datetime, timezone
     DEBUG = int(os.environ.get("DEBUG", 0))
     DATE_FORMAT = "%d %B, %Y"
     DEBUG_STR = "<!-- {debug} -->" if DEBUG else ""
